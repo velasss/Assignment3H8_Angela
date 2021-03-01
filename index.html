@@ -30,12 +30,7 @@
 
     <script>
         var userTable = document.getElementById("userTable");
-        var table = document.getElementById("nilai1");
-        var sumResPosi = 0;
-        var table = document.getElementById("nilai2");
-        var sumResSemb = 0;
-        var table = document.getElementById("nilai3");
-        var sumResMeni = 0;
+       
 
         fetch("https://indonesia-covid-19.mathdro.id/api/provinsi")
             .then(response => response.json())
@@ -47,13 +42,25 @@
                     row.insertCell(2).innerHTML = resp.data[i].kasusSemb;
                     row.insertCell(3).innerHTML = resp.data[i].kasusMeni;
 
-            sumResPosi += resp.data[i].kasusPosi;
-            sumResSemb += resp.data[i].kasusSemb;
-            sumResMeni += resp.data[i].kasusMeni;
+                    var dataResPosi = document.getElementById("sumResPosi");
+                    dataResPosi.innerHTML = sumResPosi
+                    var dataResPosi = document.getElementById("sumResSemb");
+                    dataResPosi.innerHTML = sumResSemb
+                    var dataResPosi = document.getElementById("sumResMeni");
+                    dataResPosi.innerHTML = sumResMeni
+
+                    var sumResPosi = 0;
+                    var sumResSemb = 0;
+                    var sumResMeni = 0;
+
+                    sumResPosi += resp.data[i].kasusPosi;
+                    sumResSemb += resp.data[i].kasusSemb;
+                    sumResMeni += resp.data[i].kasusMeni;
                 }
-                console.log(sumResPosi)
-      	        console.log(sumResSemb)
-                console.log(sumResMeni)
+                    console.log(sumResPosi)
+      	            console.log(sumResSemb)
+                    console.log(sumResMeni)
+
             })
             .catch(err => {
                 console.log(err)
