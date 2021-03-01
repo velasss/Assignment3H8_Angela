@@ -11,14 +11,14 @@
     
     <h1>DATA COVID19 INDONESIA</h1>
 
-    <table id="totalData" class="column">
+    <table id="table" class="column">
     <tr>
-    <p>Positif:</p>
-    <p>Sembuh:</p>
-    <p>Meninggal:</p>
+    <p>Positif:</p><span id="sumResPosi"></span>
+    <p>Sembuh:</p><span id="sumResSemb"></span>
+    <p>Meninggal:</p><span id="sumResMeni"></span>
     </tr>
     </table>
-    
+  
     <table id="userTable" border="1">
         <tr>
         <th>Provinsi</th>
@@ -30,6 +30,9 @@
 
     <script>
         var userTable = document.getElementById("userTable");
+        var table = document.getElementById("nilai1"), sumResPosi = 0;
+        var table = document.getElementById("nilai2"), sumResSemb = 0;
+        var table = document.getElementById("nilai3"), sumResMeni = 0;
 
         fetch("https://indonesia-covid-19.mathdro.id/api/provinsi")
             .then(response => response.json())
@@ -40,7 +43,14 @@
                     row.insertCell(1).innerHTML = resp.data[i].kasusPosi;
                     row.insertCell(2).innerHTML = resp.data[i].kasusSemb;
                     row.insertCell(3).innerHTML = resp.data[i].kasusMeni;
+
+            sumResPosi += resp.data[i].kasusPosi;
+            sumResSemb += resp.data[i].kasusSemb;
+            sumResMeni += resp.data[i].kasusMeni;
                 }
+                console.log(sumResPosi)
+      	        console.log(sumResSemb)
+                console.log(sumResMeni)
             })
             .catch(err => {
                 console.log(err)
