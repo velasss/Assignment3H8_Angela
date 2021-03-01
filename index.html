@@ -10,15 +10,12 @@
 <body>
     
     <h1>DATA COVID19 INDONESIA</h1>
+ 
+    <div class="column">Positif: <span id="sumResPosi"></span></div>
+    <div class="column">Sembuh: <span id="sumResSemb"></span></div>
+    <div class="column">Meninggal: <span id="sumResMeni"></span></div>
 
-    <table id="table" class="column">
-    <tr>
-    <p>Positif:</p><span id="sumResPosi"></span>
-    <p>Sembuh:</p><span id="sumResSemb"></span>
-    <p>Meninggal:</p><span id="sumResMeni"></span>
-    </tr>
-    </table>
-  
+    <br>
     <table id="userTable" border="1">
         <tr>
         <th>Provinsi</th>
@@ -30,28 +27,26 @@
 
     <script>
         var userTable = document.getElementById("userTable");
-       
+        sumResPosi = 0;
+        sumResSemb = 0;
+        sumResMeni = 0;
 
         fetch("https://indonesia-covid-19.mathdro.id/api/provinsi")
             .then(response => response.json())
             .then(resp => {
                 for (var i = 0; i < resp.data.length; i++) {
                     var row = userTable.insertRow();
-                    row.insertCell(0).innerHTML = resp.data[i].provinsi;
-                    row.insertCell(1).innerHTML = resp.data[i].kasusPosi;
-                    row.insertCell(2).innerHTML = resp.data[i].kasusSemb;
-                    row.insertCell(3).innerHTML = resp.data[i].kasusMeni;
-
                     var dataResPosi = document.getElementById("sumResPosi");
                     dataResPosi.innerHTML = sumResPosi
                     var dataResPosi = document.getElementById("sumResSemb");
                     dataResPosi.innerHTML = sumResSemb
                     var dataResPosi = document.getElementById("sumResMeni");
                     dataResPosi.innerHTML = sumResMeni
-
-                    var sumResPosi = 0;
-                    var sumResSemb = 0;
-                    var sumResMeni = 0;
+                    
+                    row.insertCell(0).innerHTML = resp.data[i].provinsi;
+                    row.insertCell(1).innerHTML = resp.data[i].kasusPosi;
+                    row.insertCell(2).innerHTML = resp.data[i].kasusSemb;
+                    row.insertCell(3).innerHTML = resp.data[i].kasusMeni;
 
                     sumResPosi += resp.data[i].kasusPosi;
                     sumResSemb += resp.data[i].kasusSemb;
